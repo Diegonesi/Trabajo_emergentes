@@ -1,14 +1,17 @@
-# Usa la imagen oficial de SQLite desde Docker Hub
-FROM sqlite:latest
+# Utiliza una imagen base de Ubuntu
+FROM ubuntu:latest
 
-# Copia tu base de datos SQLite al contenedor
-COPY mi_base_de_datos.db /ruta/del/contenedor/mi_base_de_datos.db
+# Actualiza el índice de paquetes e instala SQLite
+RUN apt-get update && apt-get install -y sqlite3
 
-# Opcional: Define el directorio de trabajo
-WORKDIR /ruta/del/contenedor/
+# Establece el directorio de trabajo en /app
+WORKDIR /app
 
-# Opcional: Cambiar al puerto a utilizar, por defecto esta:
-# EXPOSE 5432
+# Copia el script SQL que inicializa la base de datos (si es necesario)
+COPY insert_points.sql .
 
-# Opcional: Define el comando por defecto para ejecutar cuando se inicia el contenedor
-# CMD ["sqlite3", "valdivia_points.db"]
+# Expone el puerto 5432 (puerto predeterminado para SQLite)
+EXPOSE 5432
+
+# Comando para ejecutar el servidor SQLite
+CMD ["sqlite3", "test.db"]
