@@ -34,6 +34,11 @@ provincia_valdivia = filter_province(gdf_provincias, "Los Ríos", "Valdivia")
 valdivia_polygon = provincia_valdivia.iloc[0]['geometry']
 random_points = generate_random_points_within_polygon(valdivia_polygon, 100) #cambiar el numero a cuantos puntos se quieran generar.
 
+# Guardar el resultado en un nuevo archivo shapefile 
+output_shapefile_path = f'output_random_points_Los_Rios_Valdivia.shp'
+gdf_filtered = gpd.GeoDataFrame(geometry=random_points, crs=gdf_provincias.crs)
+gdf_filtered.to_file(output_shapefile_path)
+
 # Creando el archivo SQL
 sql_file_path = 'insert_points.sql'
 with open(sql_file_path, 'w') as file:
