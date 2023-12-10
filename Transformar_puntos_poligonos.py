@@ -47,7 +47,7 @@ subprocess.run(comando, shell=True)
 # Actualizar el archivo SQL
 sql_file_path = 'insert_points.sql'
 with open(sql_file_path, 'a') as file:
-    file.write('\nCREATE TABLE IF NOT EXISTS points_EPSG32719 (id INTEGER PRIMARY KEY, x REAL, y REAL);\n')
+    file.write('CREATE TABLE IF NOT EXISTS points_EPSG32719 (id INTEGER PRIMARY KEY, x REAL, y REAL);\n')
     for id, points in enumerate(coordenadas_convertidas, start=1):
         #print("points", points)
         file.write(f"INSERT INTO points_EPSG32719 (id, x, y) VALUES ({id}, {points[1]}, {points[2]});\n")
