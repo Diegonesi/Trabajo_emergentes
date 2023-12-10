@@ -30,7 +30,7 @@ cursor.execute("SELECT * FROM points")
 resultados = cursor.fetchall()
 
 # Definir los sistemas de coordenadas de entrada y salida
-entrada = CRS.from_epsg(3857)  # EPSG:4326 es el sistema de coordenadas de latitud y longitud
+entrada = CRS.from_epsg(3857)  # EPSG:3857 
 salida = CRS.from_epsg(32719)  # Formato solicitado
 
 # Crear un transformador
